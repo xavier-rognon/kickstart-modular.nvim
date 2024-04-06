@@ -21,6 +21,7 @@
 =====================================================================
 
 What is Kickstart?
+jaj
 
   Kickstart.nvim is *not* a distribution.
 
