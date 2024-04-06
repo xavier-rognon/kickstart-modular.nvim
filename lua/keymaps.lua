@@ -48,4 +48,32 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- vim: ts=2 sts=2 sw=2 et
+-- [[ Custom keymaps from my old config ]]
+
+-- Open the file explorer
+vim.keymap.set('n', '<leader>pv', vim.cmd.Oil, { desc = 'Open oil file explorer' })
+
+-- Allow to move selected line higher or lower
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- Make some motion centered to the screen
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
+-- Does not change the paste buffer when pasting
+vim.keymap.set('x', '<leader>p', [["_dP]])
+
+-- Quit insert mode
+vim.keymap.set('i', '<C-c>', '<Esc>')
+
+-- Disable the quit shortcut
+vim.keymap.set('n', 'Q', '<nop>')
+
+-- Search the word the cusror is on and allow you to replace it in all the file
+vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- Setup mapping to call :LazyGit
+vim.keymap.set('n', '<leader>gg', vim.cmd.LazyGit, { desc = 'Open the lazy git GUI' })
