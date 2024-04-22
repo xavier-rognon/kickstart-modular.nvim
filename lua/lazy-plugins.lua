@@ -100,3 +100,8 @@ require("lspconfig").clangd.setup {
     "--offset-encoding=utf-16",
   },
 }
+
+local status_ok, todo_comments = pcall(require, "todo-comments")
+if not status_ok then
+    return
+end
