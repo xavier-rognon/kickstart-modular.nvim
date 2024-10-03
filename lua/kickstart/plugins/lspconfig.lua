@@ -15,6 +15,9 @@ return {
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
     },
+    opts = {
+      autoformat = false,
+    },
     config = function()
       -- Brief aside: **What is LSP?**
       --
@@ -147,6 +150,9 @@ return {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        zls = {
+          cmd = { '/usr/bin/zls' },
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -189,6 +195,22 @@ return {
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
+          end,
+          zls = function()
+              local lspconfig = require("lspconfig")
+              lspconfig.zls.setup({
+                  root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
+                  settings = {
+                      zls = {
+                          enable_inlay_hints = true,
+                          enable_snippets = true,
+                          warn_style = true,
+                      },
+                  },
+              })
+              vim.g.zig_fmt_parse_errors = 0
+              vim.g.zig_fmt_autosave = 0
+
           end,
         },
       }

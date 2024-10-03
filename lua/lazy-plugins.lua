@@ -36,11 +36,13 @@ require('lazy').setup({
 
   require 'kickstart/plugins/lspconfig',
 
-  -- require 'kickstart/plugins/conform',
+  require 'kickstart/plugins/conform',
 
   require 'kickstart/plugins/cmp',
 
   require 'kickstart/plugins/gruvbox',
+
+  -- require 'kickstart/plugins/tokyonight',
 
   require 'kickstart/plugins/todo-comments',
 
