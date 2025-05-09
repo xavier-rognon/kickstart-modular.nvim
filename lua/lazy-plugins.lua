@@ -50,6 +50,8 @@ require('lazy').setup({
 
   require 'kickstart/plugins/treesitter',
 
+  -- require 'kickstart/plugins/harpoon',
+
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
@@ -102,6 +104,9 @@ require("lspconfig").clangd.setup {
     "--offset-encoding=utf-16",
   },
 }
+
+vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+    { desc = "Open harpoon window" })
 
 local status_ok, todo_comments = pcall(require, "todo-comments")
 if not status_ok then

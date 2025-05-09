@@ -68,12 +68,22 @@ vim.keymap.set('x', '<leader>p', [["_dP]])
 
 -- Quit insert mode
 vim.keymap.set('i', '<C-c>', '<Esc>')
+vim.keymap.set('i', '<Maj>', '<Esc>')
 
 -- Disable the quit shortcut
 vim.keymap.set('n', 'Q', '<nop>')
+vim.keymap.set('n', 'E', 'ea')
 
 -- Search the word the cusror is on and allow you to replace it in all the file
 vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Setup mapping to call :LazyGit
 vim.keymap.set('n', '<leader>gg', vim.cmd.LazyGit, { desc = 'Open the lazy git GUI' })
+
+vim.keymap.set('n', '<leader>b', ':b#<CR>', { desc = 'Go to previous buffer' })
+
+-- Toggle git-blame
+vim.keymap.set('n', '<leader>gb', function()
+  vim.g.gitblame_enabled = not vim.g.gitblame_enabled
+  print("Git Blame: " .. (vim.g.gitblame_enabled and "Enabled" or "Disabled"))
+end, { desc = 'Toggle git blame' })
