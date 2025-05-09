@@ -105,9 +105,6 @@ require("lspconfig").clangd.setup {
   },
 }
 
-vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
-    { desc = "Open harpoon window" })
-
 local status_ok, todo_comments = pcall(require, "todo-comments")
 if not status_ok then
     return

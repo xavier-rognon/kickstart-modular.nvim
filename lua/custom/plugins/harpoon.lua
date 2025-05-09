@@ -6,6 +6,7 @@ return {
     "nvim-lua/plenary.nvim",
   },
   config = function()
+    require('telescope').load_extension('harpoon')
     local harpoon = require("harpoon")
 
     harpoon:setup()
@@ -30,7 +31,7 @@ return {
       excluded_filetypes = { "harpoon", "alpha", "dashboard", "gitcommit" },
       mark_branch = false,
       save_on_change = true,
-      save_on_toggle = false,
+      save_on_toggle = true,
       sync_on_ui_close = false,
       tmux_autoclose_windows = false,
     },

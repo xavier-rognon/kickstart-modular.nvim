@@ -3,8 +3,8 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
+      { "mason-org/mason.nvim", version = "^1.0.0" },
+      { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
@@ -198,34 +198,29 @@ return {
 
       require('mason-lspconfig').setup {
         ensure_installed = {},
-        automatic_installation = true,
         handlers = {
           function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            local lspconfig = require("lspconfig")
+            local opts = {
+              capabilities = capabilities,
+            }
+            lspconfig[server_name].setup(opts)
           end,
           zls = function()
-              local lspconfig = require("lspconfig")
-              lspconfig.zls.setup({
-                  root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-                  settings = {
-                      zls = {
-                          enable_inlay_hints = true,
-                          enable_snippets = true,
-                          warn_style = true,
-                      },
-                  },
-              })
-              vim.g.zig_fmt_parse_errors = 0
-              vim.g.zig_fmt_autosave = 0
-
+            local lspconfig = require("lspconfig")
+            lspconfig.zls.setup({
+              root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
+              settings = {
+                zls = {
+                  enable_inlay_hints = true,
+                  enable_snippets = true,
+                  warn_style = true,
+                },
+              },
+            })
+            vim.g.zig_fmt_parse_errors = 0
           end,
         },
-
       }
     end,
   },
