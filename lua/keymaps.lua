@@ -82,6 +82,8 @@ vim.keymap.set('n', '<leader>gg', vim.cmd.LazyGit, { desc = 'Open the lazy git G
 
 vim.keymap.set('n', '<leader>b', ':b#<CR>', { desc = 'Go to previous buffer' })
 
+vim.keymap.set('n', '<leader>lr', vim.cmd.LspRestart, { desc = 'Restart the LSP server' })
+
 -- Toggle git-blame
 vim.keymap.set('n', '<leader>gb', function()
   vim.g.gitblame_enabled = not vim.g.gitblame_enabled
