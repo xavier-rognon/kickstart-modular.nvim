@@ -25,6 +25,8 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  { 'echasnovski/mini.files', version = false, lazy = false, opts = {} },
+
   -- modular approach: using `require 'path/name'` will
   -- include a plugin definition from file lua/path/name.lua
 
@@ -49,6 +51,7 @@ require('lazy').setup({
   require 'kickstart/plugins/mini',
 
   require 'kickstart/plugins/treesitter',
+
 
   -- require 'kickstart/plugins/harpoon',
 

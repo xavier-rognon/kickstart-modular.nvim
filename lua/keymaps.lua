@@ -52,6 +52,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Open the file explorer
 vim.keymap.set('n', '<leader>pv', vim.cmd.Oil, { desc = 'Open oil file explorer' })
+vim.keymap.set('n', '<leader>e', function ()
+  local MiniFiles = require("mini.files")
+  local _ = MiniFiles.close()
+    or MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+  vim.defer_fn(function()
+    MiniFiles.reveal_cwd()
+  end, 30)
+end, { desc = 'Open netrw file explorer' })
 
 -- Allow to move selected line higher or lower
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
@@ -89,3 +97,18 @@ vim.keymap.set('n', '<leader>gb', function()
   vim.g.gitblame_enabled = not vim.g.gitblame_enabled
   print("Git Blame: " .. (vim.g.gitblame_enabled and "Enabled" or "Disabled"))
 end, { desc = 'Toggle git blame' })
+
+-- Custom VimTeX keymaps
+vim.keymap.set('n', '<leader>lv', '<cmd>VimtexView<cr>', { desc = 'View PDF' })
+vim.keymap.set('n', '<leader>ll', '<cmd>VimtexCompile<cr>', { desc = 'Compile LaTeX' })
+vim.keymap.set('n', '<leader>lc', '<cmd>VimtexClean<cr>', { desc = 'Clean aux files' })
+vim.keymap.set('n', '<leader>lC', '<cmd>VimtexClean!<cr>', { desc = 'Clean all files' })
+vim.keymap.set('n', '<leader>lt', '<cmd>VimtexTocToggle<cr>', { desc = 'Toggle TOC' })
+
+-- Quick math mode
+vim.keymap.set('n', '<leader>m', '$$<Left>', { desc = 'Inline math' })
+vim.keymap.set('n', '<leader>M', '$$$$<Up>', { desc = 'Display math' })
+
+-- Quick environments
+vim.keymap.set('n', '<leader>be', '\\begin{}<CR>\\end{}<Up><Right>', { desc = 'Begin environment' })
+vim.keymap.set('n', '<leader>eq', '\\begin{equation}<CR>\\end{equation}<Up><End>', { desc = 'Equation environment' })
