@@ -42,7 +42,7 @@ require('lazy').setup({
 
   require 'kickstart/plugins/cmp',
 
-  require 'kickstart/plugins/gruvbox',
+  require 'kickstart/plugins/gruvbox', -- Keep this line as it imports the plugin
 
   -- require 'kickstart/plugins/tokyonight',
 
@@ -107,6 +107,12 @@ require("lspconfig").clangd.setup {
     "--offset-encoding=utf-16",
   },
 }
+
+-- This is the correct placement for the gruvbox setup and colorscheme command
+require("gruvbox").setup({
+  transparent_mode = true,
+})
+vim.cmd.colorscheme("gruvbox") -- Add this line to activate the colorscheme
 
 local status_ok, todo_comments = pcall(require, "todo-comments")
 if not status_ok then
